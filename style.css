@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+.content {
+    display: flex;
+    background-color: red;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.gameboardUi {
+    height: calc(100vh - 40px);
+    width: calc(100vw - 40px);
+    margin: 20px;
+    border: 1px solid black;
+    background-color: rgb(255, 255, 166);
+}
+
+.playField {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+.playContainer {
+    height: 75%;
+    width: 75%;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 100%;
+    text-align: center;
+}
+.endZone {
+    height: 75%;
+    width: 75%;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 100%;
+    text-align: center;
+}
+.yellowZone{
+    border-color: orange;
+}
+.greenZone{
+    border-color: green;
+}
+.redZone{
+    border-color: red;
+}
+.blueZone{
+    border-color: blue;
+}

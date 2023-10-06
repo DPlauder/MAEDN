@@ -1,1 +1,1 @@
-{"version":3,"file":"gamecube.js","sourceRoot":"","sources":["../../src/Components/gamecube.ts"],"names":[],"mappings":""}
+{"version":3,"file":"gamecube.js","sourceRoot":"","sources":["../../src/Components/gamecube.ts"],"names":[],"mappings":"AACA,MAAM,QAAQ;IAEV;QACI,IAAI,CAAC,SAAS,GAAG,CAAC,CAAC;IACvB,CAAC;IACD,QAAQ;QACJ,IAAI,CAAC,SAAS,GAAG,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC;IACvD,CAAC;IACD,SAAS;QACL,OAAO,IAAI,CAAC,SAAS,KAAK,CAAC,CAAC;IAChC,CAAC;CACJ;AAED,OAAO,EAAC,QAAQ,EAAC,CAAC"}
