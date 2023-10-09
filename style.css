@@ -57,3 +57,10 @@
 .blueZone{
     border-color: blue;
 }
+.gameCube {
+    height: 75%;
+    width: 75%;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 10px;
+}

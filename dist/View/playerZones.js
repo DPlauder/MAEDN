@@ -41,20 +41,16 @@ class PlayerZones {
     }
     setStartPoints(newDiv, coordinates) {
         if (this.redStartPoint[0] === coordinates[0] && this.redStartPoint[1] === coordinates[1]) {
-            newDiv.classList.add("redZone");
-            newDiv.id = `startRed`;
+            newDiv.classList.add("redZone", "startPoint");
         }
         if (this.blueStartPoint[0] === coordinates[0] && this.blueStartPoint[1] === coordinates[1]) {
-            newDiv.classList.add("blueZone");
-            newDiv.id = `startBlue`;
+            newDiv.classList.add("blueZone", "startPoint");
         }
         if (this.yellowStartPoint[0] === coordinates[0] && this.yellowStartPoint[1] === coordinates[1]) {
-            newDiv.classList.add("yellowZone");
-            newDiv.id = `startYellow`;
+            newDiv.classList.add("yellowZone", "startPoint");
         }
         if (this.greenStartPoint[0] === coordinates[0] && this.greenStartPoint[1] === coordinates[1]) {
-            newDiv.classList.add("greenZone");
-            newDiv.id = `startGreen`;
+            newDiv.classList.add("greenZone", "startPoint");
         }
     }
     setReserveBank(newDiv, coordinates) {

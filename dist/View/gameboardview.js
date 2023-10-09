@@ -1,9 +1,11 @@
 import { PlayField } from "./playfield.js";
 import { PlayerZones } from "./playerZones.js";
+import { GameCubeUi } from "./gamecubeUi.js";
 class GameBoardUi {
     constructor() {
         this.playField = new PlayField();
         this.playerZones = new PlayerZones();
+        this.gameCubeUi = new GameCubeUi();
     }
     createGrid() {
         const parentElement = document.getElementById("playField");
@@ -16,9 +18,12 @@ class GameBoardUi {
                 this.playerZones.setEndzone(newDiv, targetCoordinates);
                 this.playerZones.setStartPoints(newDiv, targetCoordinates);
                 this.playerZones.setReserveBank(newDiv, targetCoordinates);
+                this.gameCubeUi.createGamecubeUi(newDiv, targetCoordinates);
                 parentElement.appendChild(newDiv);
             }
         }
+    }
+    updateUi() {
     }
 }
 export { GameBoardUi };

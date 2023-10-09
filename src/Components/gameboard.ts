@@ -9,7 +9,6 @@ class GameBoard{
     constructor(){
         this.gameboard = Array(40).fill(0);
         this.figureStartPoint = 0;
-
     }
     placeFigure(player: Player, figure: Figure): void{
         const spawningFigure = figure;

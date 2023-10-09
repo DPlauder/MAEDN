@@ -1,13 +1,16 @@
 import { PlayField } from "./playfield.js";
 import { PlayerZones } from "./playerZones.js";
-import { Player } from "../Components/player.js";
+import { GameCubeUi } from "./gamecubeUi.js";
+
 
 class GameBoardUi{
     playField: PlayField;
     playerZones: PlayerZones;
+    gameCubeUi: GameCubeUi;
     constructor(){
         this.playField = new PlayField();
         this.playerZones = new PlayerZones();
+        this.gameCubeUi = new GameCubeUi();
     }
     createGrid(): void{
         const parentElement = document.getElementById("playField") as HTMLDivElement
@@ -22,10 +25,13 @@ class GameBoardUi{
                 this.playerZones.setEndzone(newDiv, targetCoordinates)
                 this.playerZones.setStartPoints(newDiv, targetCoordinates); 
                 this.playerZones.setReserveBank(newDiv, targetCoordinates);          
-                                   
+                this.gameCubeUi.createGamecubeUi(newDiv, targetCoordinates) ;      
                 parentElement.appendChild(newDiv);
             }
         }
+    }
+    updateUi(){
+        
     }
 }
 
