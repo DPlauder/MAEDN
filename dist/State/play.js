@@ -19,10 +19,10 @@ class Play {
     }
     playGame() {
         const grid = document.getElementById('playField');
+        this.gameBoardUi.updateGameboardPlayerBank(this.players);
         grid.addEventListener('click', (e) => {
             this.checkGamePhase(e.target);
             this.gameBoardUi.updateGameBoardUi(this.gameBoard);
-            this.gameBoardUi.updateFiguresOnBank(this.players);
         });
     }
     checkGamePhase(element) {
@@ -36,6 +36,8 @@ class Play {
         else if (this.gamePhase === 1) {
             idNum = this.getChosenFigureInput();
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
+            this.gameBoardUi.updateGameboardPlayerBank(this.players);
+            this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
             this.setGamePhase();
         }
@@ -66,18 +68,19 @@ class Play {
         const getCurrentPlayer = this.getCurrentPlayer();
         this.gameCube.rollCube();
         this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
-        console.log(this.gameCube.rolledNum, " Wurf");
     }
     moveCurrentPlayerFigure(figureToMove) {
         const currentPlayer = this.getCurrentPlayer();
         const rolledNum = this.gameCube.rolledNum;
         const targetPos = rolledNum + figureToMove.position;
-        if (figureToMove.isOnField && figureToMove.position < 40 && figureToMove.checkMaxDistance(targetPos)) {
-            figureToMove.moveOnPlayerBoard(rolledNum);
+        if (figureToMove.isOnField && targetPos <= 40 && figureToMove.getMaxDistance(targetPos)) {
             this.gameBoard.moveFigure(figureToMove, rolledNum);
-        }
-        else if (figureToMove.isOnField && figureToMove.position > 40 && figureToMove.checkMaxDistance(targetPos)) {
             figureToMove.moveOnPlayerBoard(rolledNum);
+        }
+        else if (figureToMove.isOnField && targetPos > 40 && figureToMove.getMaxDistance(targetPos)) {
+            figureToMove.moveOnPlayerBoard(rolledNum);
+            currentPlayer.addFigureInEndzone(figureToMove);
+            figureToMove.setIsInEndzone();
         }
         else if (!figureToMove.isOnField) {
             figureToMove.placeOnField();

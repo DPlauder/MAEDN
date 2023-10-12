@@ -5,7 +5,7 @@ import { Play } from "./State/play.js";
 const play = new Play();
 const myPlayer1 = new Player("red");
 play.addPlayer(myPlayer1);
-/*
+
 const myPlayer2 = new Player("blue");
 play.addPlayer(myPlayer2);
 
@@ -14,7 +14,6 @@ play.addPlayer(myPlayer3);
 
 const myPlayer4 = new Player("yellow");
 play.addPlayer(myPlayer4);
-*/
 
 
 play.playGame();
@@ -30,7 +29,8 @@ console.log(play);
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //TODO:     Figur spawn only on 6 
-//TODO:     get Figures on Ui    
+//TODO:     show Figures on Bank and Endzone
+//TODO      Errorhandler when all figures on field
 
 //-----------------------------------------------------------------------
 //TODO      3xRoll when no Figur on Board

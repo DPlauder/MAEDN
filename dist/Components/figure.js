@@ -7,12 +7,7 @@ class Figure {
         this.isInEndzone = false;
     }
     moveOnPlayerBoard(rolledNum) {
-        if (this.position + rolledNum < 44) {
-            this.position += rolledNum;
-        }
-        else {
-            console.log("Ziehen nicht möglich");
-        }
+        this.position += rolledNum;
     }
     placeOnField() {
         this.isOnField = true;
@@ -25,7 +20,13 @@ class Figure {
     setIsInEndzone() {
         this.isInEndzone = true;
     }
-    checkMaxDistance(newPos) {
+    getEndzonePosition() {
+        return this.position - 41;
+    }
+    getIsInEndzone() {
+        return this.isInEndzone;
+    }
+    getMaxDistance(newPos) {
         return newPos <= 44;
     }
 }

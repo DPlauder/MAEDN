@@ -34,20 +34,14 @@ class GameBoard {
     moveFigure(figure, rolledNum) {
         const indexOfFigure = this.getIndexOfFigure(figure);
         let newPosition = indexOfFigure + rolledNum;
-        console.log(indexOfFigure, " ", newPosition);
         if (newPosition >= 40) {
             newPosition = newPosition - 40;
         }
         if (this.isOccupied(newPosition)) {
             this.resetFigure(newPosition);
         }
-        if ((figure.position + rolledNum) > 40) {
-            figure.setIsInEndzone();
-        }
-        else {
-            this.gameboard[newPosition] = figure;
-        }
         this.removeFigureStartPoint(figure);
+        this.gameboard[newPosition] = figure;
     }
     removeFigureStartPoint(figure) {
         const indexOfFigure = this.getIndexOfFigure(figure);

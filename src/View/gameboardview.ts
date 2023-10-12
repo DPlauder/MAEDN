@@ -45,13 +45,32 @@ class GameBoardUi{
             }
         }       
     }
-    updateFiguresOnBank(players: Player[]){
-        players.forEach(element => {
-            element.getFiguresOnBank();
-            console.log(element);
-            
-        })
+
+    updateGameboardPlayerBank(players: Player[]){
+        players.forEach(element =>{
+            let myFiguresOnBank: number[] = element.getFiguresOnBank();
+            if(myFiguresOnBank){
+                for(let i = 1; i <= element.myFigures.length; i++){                   
+                    const bankElement = document.getElementById(`${element.color}Bank-${i}`) as HTMLDivElement;
+                    if(myFiguresOnBank.includes(i)){
+                        bankElement.classList.add(`${element.color}Figure`);
+                    } else{
+                        bankElement.classList.remove(`${element.color}Figure`);
+                    }                                  
+                }
+            }
+        });
     }
+    updateGameBoardPlayerEndzone(player: Player){          
+        for(let i = 0; i < player.myFigures.length; i++){ 
+                      
+            if(player.myFigures[i].isInEndzone){
+                const endzoneElement = document.getElementById(`${player.color}-${player.myFigures[i].getEndzonePosition()}`) as HTMLDivElement;                              
+                endzoneElement.classList.add(`${player.color}Figure`);
+            }
+        }
+    }
+
 }
 
 export {GameBoardUi}

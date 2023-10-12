@@ -3,10 +3,12 @@ import { Figure } from "./figure.js";
 class Player{
     public color: string;
     public myFigures: Figure[];
+    private myPlayerEndzone: Figure[] | number[];
     constructor(color:string){
         this.color = color;
         this.myFigures = [];
         this.createFigures();
+        this.myPlayerEndzone = [0,0,0,0];
     }
     createFigures(): void{
         for(let i = 1; i < 5; i++){
@@ -14,12 +16,17 @@ class Player{
             this.myFigures.push(figure);
         }           
     }
-    getFiguresOnBank(): void{
+    addFigureInEndzone(figure: Figure): void{
+        this.myPlayerEndzone[figure.getEndzonePosition()] = figure;
+    }
+    getFiguresOnBank(){
+        let myFiguresOnBank: number[] = [];
         this.myFigures.forEach(element => {
             if(!element.isOnField){
-                return element.id
-            }
-    })
+                myFiguresOnBank.push(element.id);
+            }        
+        });
+        return myFiguresOnBank;
     }
     checkAllFiguresInEndzone(): boolean{
         return this.myFigures.every(figure => figure.isInEndzone)

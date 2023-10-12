@@ -12,10 +12,6 @@ class GameCubeUi {
         const gameCubeFrontend = document.getElementById('gameCube');
         gameCubeFrontend.innerHTML = `${rolledNum}`;
     }
-    gameCubeClickHandler(callback) {
-        const gameCubeFrontend = document.getElementById('gameCube');
-        gameCubeFrontend.addEventListener('click', callback);
-    }
 }
 export { GameCubeUi };
 //# sourceMappingURL=gamecubeUi.js.map

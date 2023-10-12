@@ -34,11 +34,29 @@ class GameBoardUi {
             }
         }
     }
-    updateFiguresOnBank(players) {
+    updateGameboardPlayerBank(players) {
         players.forEach(element => {
-            element.getFiguresOnBank();
-            console.log(element);
+            let myFiguresOnBank = element.getFiguresOnBank();
+            if (myFiguresOnBank) {
+                for (let i = 1; i <= element.myFigures.length; i++) {
+                    const bankElement = document.getElementById(`${element.color}Bank-${i}`);
+                    if (myFiguresOnBank.includes(i)) {
+                        bankElement.classList.add(`${element.color}Figure`);
+                    }
+                    else {
+                        bankElement.classList.remove(`${element.color}Figure`);
+                    }
+                }
+            }
         });
+    }
+    updateGameBoardPlayerEndzone(player) {
+        for (let i = 0; i < player.myFigures.length; i++) {
+            if (player.myFigures[i].isInEndzone) {
+                const endzoneElement = document.getElementById(`${player.color}-${player.myFigures[i].getEndzonePosition()}`);
+                endzoneElement.classList.add(`${player.color}Figure`);
+            }
+        }
     }
 }
 export { GameBoardUi };

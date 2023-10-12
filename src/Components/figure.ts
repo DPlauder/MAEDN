@@ -13,16 +13,12 @@ class Figure{
         this.isInEndzone = false;
     }
     moveOnPlayerBoard(rolledNum:number): void{
-        if(this.position + rolledNum < 44){
-            this.position += rolledNum
-        } else{
-            console.log("Ziehen nicht möglich");           
-        }       
+            this.position += rolledNum           
     }
     placeOnField(): void{
         this.isOnField = true;
         this.position = 1;
-    }   
+    }
     removeFromField(): void{
         this.isOnField = false;
         this.position = 0;
@@ -30,7 +26,13 @@ class Figure{
     setIsInEndzone(): void{
         this.isInEndzone = true;
     }
-    checkMaxDistance(newPos: number): boolean{
+    getEndzonePosition(): number{
+        return this.position - 41;
+    }
+    getIsInEndzone(): boolean{
+        return this.isInEndzone;
+    }
+    getMaxDistance(newPos: number): boolean{
         return newPos <= 44;
     }
 }

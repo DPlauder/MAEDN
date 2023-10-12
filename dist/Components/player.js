@@ -4,6 +4,7 @@ class Player {
         this.color = color;
         this.myFigures = [];
         this.createFigures();
+        this.myPlayerEndzone = [0, 0, 0, 0];
     }
     createFigures() {
         for (let i = 1; i < 5; i++) {
@@ -11,12 +12,17 @@ class Player {
             this.myFigures.push(figure);
         }
     }
+    addFigureInEndzone(figure) {
+        this.myPlayerEndzone[figure.getEndzonePosition()] = figure;
+    }
     getFiguresOnBank() {
+        let myFiguresOnBank = [];
         this.myFigures.forEach(element => {
             if (!element.isOnField) {
-                return element.id;
+                myFiguresOnBank.push(element.id);
             }
         });
+        return myFiguresOnBank;
     }
     checkAllFiguresInEndzone() {
         return this.myFigures.every(figure => figure.isInEndzone);

@@ -5,7 +5,7 @@ import { Figure } from "../Components/figure.js";
 import { GameBoardUi } from "../View/gameboardview.js";
 
 class Play{
-    private players: Player[]
+    public players: Player[]
     private currentPlayerIndex: number;
     public gameCube: GameCube;
     public gameBoard: GameBoard;
@@ -32,10 +32,10 @@ class Play{
 
     playGame(): void{       
         const grid = document.getElementById('playField') as HTMLDivElement;
+        this.gameBoardUi.updateGameboardPlayerBank(this.players);
         grid.addEventListener('click', (e) => {
             this.checkGamePhase(e.target);
             this.gameBoardUi.updateGameBoardUi(this.gameBoard);
-            this.gameBoardUi.updateFiguresOnBank(this.players);
         })
     }
     checkGamePhase(element: EventTarget | null){
@@ -48,6 +48,8 @@ class Play{
         } else if(this.gamePhase === 1){
             idNum = this.getChosenFigureInput();
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
+            this.gameBoardUi.updateGameboardPlayerBank(this.players);
+            this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
             this.setGamePhase(); 
         }      
@@ -61,7 +63,7 @@ class Play{
         }
     }
 
-    getChosenFigureInput(){
+    getChosenFigureInput(): number{
         let figureId = prompt("Gib Nummer ein");
             if(figureId){
                 let idNum = parseInt(figureId);
@@ -81,9 +83,7 @@ class Play{
     rollDice(): void{ 
         const getCurrentPlayer = this.getCurrentPlayer();
         this.gameCube.rollCube();
-        this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
-        console.log(this.gameCube.rolledNum, " Wurf");
-        
+        this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);        
     }
 
     moveCurrentPlayerFigure(figureToMove: Figure): void{
@@ -91,11 +91,13 @@ class Play{
         const rolledNum = this.gameCube.rolledNum;
         const targetPos = rolledNum + figureToMove.position;
 
-        if(figureToMove.isOnField && figureToMove.position < 40 && figureToMove.checkMaxDistance(targetPos)){
+        if(figureToMove.isOnField && targetPos <= 40 && figureToMove.getMaxDistance(targetPos)){
+            this.gameBoard.moveFigure(figureToMove, rolledNum);
+            figureToMove.moveOnPlayerBoard(rolledNum);          
+        } else if(figureToMove.isOnField && targetPos > 40 && figureToMove.getMaxDistance(targetPos)){
             figureToMove.moveOnPlayerBoard(rolledNum);
-            this.gameBoard.moveFigure(figureToMove, rolledNum);       
-        } else if(figureToMove.isOnField && figureToMove.position > 40 && figureToMove.checkMaxDistance(targetPos)){
-            figureToMove.moveOnPlayerBoard(rolledNum);
+            currentPlayer.addFigureInEndzone(figureToMove);
+            figureToMove.setIsInEndzone()
         } else if (!figureToMove.isOnField){
             figureToMove.placeOnField();
             this.gameBoard.placeFigure(currentPlayer, figureToMove);

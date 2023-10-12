@@ -16,12 +16,6 @@ class GameCubeUi{
         const gameCubeFrontend = document.getElementById('gameCube') as HTMLDivElement;
         gameCubeFrontend.innerHTML = `${rolledNum}`;
     }
-    
-    gameCubeClickHandler(callback: () => void) {
-        const gameCubeFrontend = document.getElementById('gameCube') as HTMLDivElement;
-        gameCubeFrontend.addEventListener('click', callback);
-    }
-    
 }
 
 export {GameCubeUi};

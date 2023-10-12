@@ -61,22 +61,18 @@ class PlayerZones {
         if (indexOfRed !== -1) {
             newDiv.classList.add(`redBank`, `playContainer`, `redZone`);
             newDiv.id = `redBank-${indexOfRed + 1}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfBlue !== -1) {
             newDiv.classList.add(`blueBank`, `playContainer`, `blueZone`);
             newDiv.id = `blueBank-${indexOfBlue + 1}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfYellow !== -1) {
             newDiv.classList.add(`yellowBank`, `playContainer`, `yellowZone`);
             newDiv.id = `yellowBank-${indexOfYellow + 1}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfGreen !== -1) {
             newDiv.classList.add(`greenBank`, `playContainer`, `greenZone`);
             newDiv.id = `greenBank-${indexOfGreen + 1}`;
-            newDiv.innerHTML = newDiv.id;
         }
     }
 }
