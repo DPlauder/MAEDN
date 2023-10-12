@@ -1,7 +1,7 @@
 class Figure{
     readonly id:number;
-    private color:string;
-    private position: number;
+    public color:string;
+    public position: number;
     public isOnField: boolean;
     public isInEndzone: boolean;
 
@@ -31,7 +31,7 @@ class Figure{
         this.isInEndzone = true;
     }
     checkMaxDistance(newPos: number): boolean{
-        return newPos >= 45
+        return newPos <= 44;
     }
 }
 

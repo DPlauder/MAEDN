@@ -14,9 +14,9 @@ class PlayField{
         if(indexOfCoords !== -1){  
             newDiv.classList.add("playContainer");                 
             newDiv.id = `playfield-${indexOfCoords}`;
-            newDiv.innerHTML = newDiv.id;
         }
     }
+    
 }
 
 export {PlayField};

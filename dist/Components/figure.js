@@ -26,7 +26,7 @@ class Figure {
         this.isInEndzone = true;
     }
     checkMaxDistance(newPos) {
-        return newPos >= 45;
+        return newPos <= 44;
     }
 }
 export { Figure };

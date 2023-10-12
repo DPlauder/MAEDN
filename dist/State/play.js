@@ -8,10 +8,10 @@ class Play {
         this.currentPlayerIndex = 0;
         this.gameCube = new GameCube();
         this.gameBoardUi = new GameBoardUi();
-        this.createGame();
+        this.createNewGame();
         this.gamePhase = 0;
     }
-    createGame() {
+    createNewGame() {
         this.gameBoardUi.createGrid();
     }
     addPlayer(player) {
@@ -21,56 +21,41 @@ class Play {
         const grid = document.getElementById('playField');
         grid.addEventListener('click', (e) => {
             this.checkGamePhase(e.target);
+            this.gameBoardUi.updateGameBoardUi(this.gameBoard);
+            this.gameBoardUi.updateFiguresOnBank(this.players);
         });
-        /*
-                this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
-                let figureId = prompt("Gib Nummer ein");
-                if(figureId){
-                    let idNum = parseInt(figureId);
-                    this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
-                    this.nextTurn();
-                }
-                if(this.isGameEnd(currentPlayer)){
-                    isGameRunning = false;
-                }
-                */
     }
     checkGamePhase(element) {
-        console.log(element.id);
-        let figureId;
         let idNum;
         const currentPlayer = this.getCurrentPlayer();
+        this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if (this.gamePhase === 0 && element.id === "gameCube") {
             this.rollDice();
             this.setGamePhase();
         }
         else if (this.gamePhase === 1) {
-            //this.getChosenFigureInput();
-        }
-        else if (this.gamePhase == 2) {
+            idNum = this.getChosenFigureInput();
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
             this.nextTurn();
             this.setGamePhase();
-            console.log(this.gamePhase);
         }
     }
     setGamePhase() {
-        if (this.gamePhase <= 1) {
+        if (this.gamePhase === 0) {
             this.gamePhase++;
         }
         else {
             this.gamePhase = 0;
         }
     }
-    /*
-    getChosenFigureInput(){
-        figureId = prompt("Gib Nummer ein");
-            if(figureId){
-                idNum = parseInt(figureId);
-                this.setGamePhase();
-            }
+    getChosenFigureInput() {
+        let figureId = prompt("Gib Nummer ein");
+        if (figureId) {
+            let idNum = parseInt(figureId);
+            return idNum;
+        }
+        return 0;
     }
-*/
     getCurrentPlayer() {
         return this.players[this.currentPlayerIndex];
     }
@@ -86,15 +71,20 @@ class Play {
     moveCurrentPlayerFigure(figureToMove) {
         const currentPlayer = this.getCurrentPlayer();
         const rolledNum = this.gameCube.rolledNum;
-        if (figureToMove.isOnField) {
+        const targetPos = rolledNum + figureToMove.position;
+        if (figureToMove.isOnField && figureToMove.position < 40 && figureToMove.checkMaxDistance(targetPos)) {
             figureToMove.moveOnPlayerBoard(rolledNum);
             this.gameBoard.moveFigure(figureToMove, rolledNum);
-            console.log("if onfield");
         }
-        else {
+        else if (figureToMove.isOnField && figureToMove.position > 40 && figureToMove.checkMaxDistance(targetPos)) {
+            figureToMove.moveOnPlayerBoard(rolledNum);
+        }
+        else if (!figureToMove.isOnField) {
             figureToMove.placeOnField();
             this.gameBoard.placeFigure(currentPlayer, figureToMove);
-            console.log("not onfield");
+        }
+        else {
+            console.log("Fehler moveCurrentPlayerFigure");
         }
     }
     isGameEnd(player) {

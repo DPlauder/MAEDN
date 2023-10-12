@@ -18,11 +18,11 @@ class Play{
         this.currentPlayerIndex = 0;
         this.gameCube = new GameCube();
         this.gameBoardUi = new GameBoardUi();
-        this.createGame();
+        this.createNewGame();
         this.gamePhase = 0;
     }
 
-    createGame(): void{
+    createNewGame(): void{
         this.gameBoardUi.createGrid();
     }
 
@@ -33,54 +33,43 @@ class Play{
     playGame(): void{       
         const grid = document.getElementById('playField') as HTMLDivElement;
         grid.addEventListener('click', (e) => {
-            this.checkGamePhase(e.target);           
+            this.checkGamePhase(e.target);
+            this.gameBoardUi.updateGameBoardUi(this.gameBoard);
+            this.gameBoardUi.updateFiguresOnBank(this.players);
         })
-    /*
-            this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
-            let figureId = prompt("Gib Nummer ein");
-            if(figureId){
-                let idNum = parseInt(figureId);
-                this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
-                this.nextTurn();
-            }
-            if(this.isGameEnd(currentPlayer)){
-                isGameRunning = false;
-            }
-            */
     }
     checkGamePhase(element: EventTarget | null){
-        console.log((element as HTMLElement).id);
-        let figureId;
-        let idNum;
+        let idNum: number;
         const currentPlayer = this.getCurrentPlayer();
+        this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gamePhase === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
             this.setGamePhase();
         } else if(this.gamePhase === 1){
-            //this.getChosenFigureInput();
-        } else if(this.gamePhase == 2){
+            idNum = this.getChosenFigureInput();
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
             this.nextTurn();
-            this.setGamePhase();       
-            console.log(this.gamePhase);           
+            this.setGamePhase(); 
         }      
+         
     }   
-    setGamePhase(){
-        if(this.gamePhase <= 1){
+    setGamePhase(): void{
+        if(this.gamePhase === 0){
             this.gamePhase++;
         } else{
             this.gamePhase = 0;
         }
     }
-    /*
+
     getChosenFigureInput(){
-        figureId = prompt("Gib Nummer ein");
+        let figureId = prompt("Gib Nummer ein");
             if(figureId){
-                idNum = parseInt(figureId);
-                this.setGamePhase();
+                let idNum = parseInt(figureId);
+                return idNum;
             }
+            return 0;
     }
-*/
+
     getCurrentPlayer(): Player{
         return this.players[this.currentPlayerIndex];
     }
@@ -100,19 +89,21 @@ class Play{
     moveCurrentPlayerFigure(figureToMove: Figure): void{
         const currentPlayer = this.getCurrentPlayer();
         const rolledNum = this.gameCube.rolledNum;
+        const targetPos = rolledNum + figureToMove.position;
 
-        if(figureToMove.isOnField){
+        if(figureToMove.isOnField && figureToMove.position < 40 && figureToMove.checkMaxDistance(targetPos)){
             figureToMove.moveOnPlayerBoard(rolledNum);
-            this.gameBoard.moveFigure(figureToMove, rolledNum);
-            console.log("if onfield");
-            
-        } else{
+            this.gameBoard.moveFigure(figureToMove, rolledNum);       
+        } else if(figureToMove.isOnField && figureToMove.position > 40 && figureToMove.checkMaxDistance(targetPos)){
+            figureToMove.moveOnPlayerBoard(rolledNum);
+        } else if (!figureToMove.isOnField){
             figureToMove.placeOnField();
             this.gameBoard.placeFigure(currentPlayer, figureToMove);
-            console.log("not onfield");
+        } else{
+            console.log("Fehler moveCurrentPlayerFigure");            
         }
     }
-    isGameEnd(player: Player){
+    isGameEnd(player: Player): boolean{
         return player.checkAllFiguresInEndzone();
     }
 }

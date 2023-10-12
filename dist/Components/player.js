@@ -11,6 +11,13 @@ class Player {
             this.myFigures.push(figure);
         }
     }
+    getFiguresOnBank() {
+        this.myFigures.forEach(element => {
+            if (!element.isOnField) {
+                return element.id;
+            }
+        });
+    }
     checkAllFiguresInEndzone() {
         return this.myFigures.every(figure => figure.isInEndzone);
     }

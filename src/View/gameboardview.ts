@@ -1,6 +1,9 @@
 import { PlayField } from "./playfield.js";
 import { PlayerZones } from "./playerZones.js";
 import { GameCubeUi } from "./gamecubeUi.js";
+import { GameBoard } from "../Components/gameboard.js";
+import { Figure } from "../Components/figure.js";
+import { Player } from "../Components/player.js";
 
 
 class GameBoardUi{
@@ -17,7 +20,6 @@ class GameBoardUi{
         for(let row = 0; row<11; row++){
             for(let column = 0; column<11; column++){
                 const newDiv = document.createElement("div");
-                //newDiv.innerHTML = `${row} + ${column}`;
 
                 const targetCoordinates = [row, column];
                 this.playField.addId(newDiv, targetCoordinates);
@@ -27,11 +29,28 @@ class GameBoardUi{
                 this.playerZones.setReserveBank(newDiv, targetCoordinates);          
                 this.gameCubeUi.createGamecubeUi(newDiv, targetCoordinates) ;      
                 parentElement.appendChild(newDiv);
+
+
+                //newDiv.innerHTML = `${row} + ${column}`;
             }
         }
     }
-    updateUi(){
-        
+    updateGameBoardUi(gameBoard: GameBoard){
+        for(let i = 0; i < gameBoard.gameboard.length; i++){
+            const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;                       
+            if(gameBoard.gameboard[i] != 0){
+                playField.classList.toggle(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
+            } else if (gameBoard.gameboard[i] === 0){
+                playField.classList.toggle(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
+            }
+        }       
+    }
+    updateFiguresOnBank(players: Player[]){
+        players.forEach(element => {
+            element.getFiguresOnBank();
+            console.log(element);
+            
+        })
     }
 }
 

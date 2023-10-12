@@ -64,3 +64,20 @@
     border: 5px solid black;
     border-radius: 10px;
 }
+.yellowFigure{
+    background-color: yellow;
+}
+.greenFigure{
+    background-color: greenyellow;
+}
+.redFigure{
+    background-color: red;
+}
+.blueFigure{
+    background-color: blue;
+}
+.noFigure{
+    background-color: white;
+}
+
+

@@ -5,6 +5,17 @@ import { Play } from "./State/play.js";
 const play = new Play();
 const myPlayer1 = new Player("red");
 play.addPlayer(myPlayer1);
+/*
+const myPlayer2 = new Player("blue");
+play.addPlayer(myPlayer2);
+
+const myPlayer3 = new Player("green");
+play.addPlayer(myPlayer3);
+
+const myPlayer4 = new Player("yellow");
+play.addPlayer(myPlayer4);
+*/
+
 
 play.playGame();
 

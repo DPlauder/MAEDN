@@ -14,16 +14,16 @@ class PlayerZones{
     constructor(){
         this.redEndzone = [[9,5],[8,5],[7,5],[6,5]];
         this.blueEndzone = [[5,1],[5,2],[5,3],[5,4]];
-        this.yellowEndzone = [[1,5],[2,5],[3,5],[4,5]];
-        this.greenEndzone = [[5,9],[5,8],[5,7],[5,6]];
+        this.greenEndzone = [[1,5],[2,5],[3,5],[4,5]];
+        this.yellowEndzone = [[5,9],[5,8],[5,7],[5,6]];
         this.redStartPoint = [10,4];
         this.blueStartPoint = [4,0];
-        this.yellowStartPoint = [0,6];
-        this.greenStartPoint = [6,10];
+        this.yellowStartPoint = [6,10];
+        this.greenStartPoint = [0,6];
         this.redReserve = [[8,1],[8,2],[9,1],[9,2]];
         this.blueReserve = [[1,1],[1,2],[2,1],[2,2]];
-        this.yellowReserve = [[1,8],[1,9],[2,8],[2,9]];
-        this.greenReserve = [[8,8],[8,9],[9,8],[9,9]];
+        this.greenReserve = [[1,8],[1,9],[2,8],[2,9]];
+        this.yellowReserve = [[8,8],[8,9],[9,8],[9,9]];
     }
     setEndzone(newDiv: HTMLDivElement, coordinates: number[]): void{
         const indexOfRed = this.redEndzone.findIndex(coord => coord[0] === coordinates[0] && coord[1] === coordinates[1]);
