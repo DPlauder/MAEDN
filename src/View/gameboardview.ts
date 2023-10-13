@@ -62,11 +62,12 @@ class GameBoardUi{
         });
     }
     updateGameBoardPlayerEndzone(player: Player){          
-        for(let i = 0; i < player.myFigures.length; i++){ 
-                      
+        for(let i = 0; i < player.myFigures.length; i++){  
+            const endzoneElement = document.getElementById(`${player.color}-${i}`) as HTMLDivElement;                       
             if(player.myFigures[i].isInEndzone){
-                const endzoneElement = document.getElementById(`${player.color}-${player.myFigures[i].getEndzonePosition()}`) as HTMLDivElement;                              
                 endzoneElement.classList.add(`${player.color}Figure`);
+            } else {
+                endzoneElement.classList.remove(`${player.color}Figure`);
             }
         }
     }

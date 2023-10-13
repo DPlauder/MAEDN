@@ -52,7 +52,12 @@ class Play{
             this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
             this.setGamePhase(); 
-        }      
+        }
+        if(currentPlayer.checkAllFiguresInEndzone()){
+            console.log(`Player ${currentPlayer.color} has won`);
+            
+            this.endGame();
+        }
          
     }   
     setGamePhase(): void{
@@ -61,6 +66,9 @@ class Play{
         } else{
             this.gamePhase = 0;
         }
+    }
+    endGame(): void{
+        this.gamePhase = 2;
     }
 
     getChosenFigureInput(): number{
@@ -96,8 +104,9 @@ class Play{
             figureToMove.moveOnPlayerBoard(rolledNum);          
         } else if(figureToMove.isOnField && targetPos > 40 && figureToMove.getMaxDistance(targetPos)){
             figureToMove.moveOnPlayerBoard(rolledNum);
-            currentPlayer.addFigureInEndzone(figureToMove);
+            //currentPlayer.addFigureInEndzone(figureToMove);
             figureToMove.setIsInEndzone()
+            this.gameBoard.moveFigure(figureToMove, rolledNum);
         } else if (!figureToMove.isOnField){
             figureToMove.placeOnField();
             this.gameBoard.placeFigure(currentPlayer, figureToMove);

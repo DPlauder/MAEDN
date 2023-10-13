@@ -21,22 +21,18 @@ class PlayerZones {
         if (indexOfRed !== -1) {
             newDiv.classList.add(`redZone`, `endZone`);
             newDiv.id = `red-${indexOfRed}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfBlue !== -1) {
             newDiv.classList.add(`blueZone`, `endZone`);
             newDiv.id = `blue-${indexOfBlue}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfYellow !== -1) {
             newDiv.classList.add(`yellowZone`, `endZone`);
             newDiv.id = `yellow-${indexOfYellow}`;
-            newDiv.innerHTML = newDiv.id;
         }
         if (indexOfGreen !== -1) {
             newDiv.classList.add(`greenZone`, `endZone`);
             newDiv.id = `green-${indexOfGreen}`;
-            newDiv.innerHTML = newDiv.id;
         }
     }
     setStartPoints(newDiv, coordinates) {

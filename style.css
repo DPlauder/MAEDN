@@ -63,6 +63,11 @@
     background-color: white;
     border: 5px solid black;
     border-radius: 10px;
+    text-align: center;
+    font-size: 35px;
+}
+.gameCube:hover {
+    cursor: pointer;
 }
 .yellowFigure{
     background-color: yellow;

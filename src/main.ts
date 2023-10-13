@@ -28,11 +28,12 @@ console.log(play);
 
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//TODO:     Figur spawn only on 6 
-//TODO:     show Figures on Bank and Endzone
+//TODO:     show Figures Endzone(movement)
 //TODO      Errorhandler when all figures on field
 
 //-----------------------------------------------------------------------
 //TODO      3xRoll when no Figur on Board
+//TODO:     Figur spawn only on 6 
 //TODO      Extra Roll when 6 rolled
+//TODO      
 

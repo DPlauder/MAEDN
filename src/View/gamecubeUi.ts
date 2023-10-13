@@ -10,6 +10,7 @@ class GameCubeUi{
         if(this.gameCubeZone[0] === coordinates[0] && this.gameCubeZone[1] === coordinates[1]){
             newDiv.classList.add("gameCube");
             newDiv.id = `gameCube`;
+            newDiv.innerHTML = "6"
         }
     }
     showGameCubeNum(rolledNum: number){

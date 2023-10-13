@@ -40,16 +40,19 @@ class GameBoard{
     moveFigure(figure: Figure, rolledNum: number): void{
         const indexOfFigure = this.getIndexOfFigure(figure);
         let newPosition = indexOfFigure + rolledNum;
-        
+
         if(newPosition >= 40){
-            newPosition = newPosition - 40;
-            
+            newPosition = newPosition - 40;            
         }
+
         if(this.isOccupied(newPosition)){
             this.resetFigure(newPosition);            
         }
+        if(!figure.getIsInEndzone()){
+            this.gameboard[newPosition] = figure;
+        }
         this.removeFigureStartPoint(figure);
-        this.gameboard[newPosition] = figure;
+        
 
     }
     removeFigureStartPoint(figure:Figure): void{

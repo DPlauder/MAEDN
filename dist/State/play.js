@@ -41,6 +41,10 @@ class Play {
             this.nextTurn();
             this.setGamePhase();
         }
+        if (currentPlayer.checkAllFiguresInEndzone()) {
+            console.log(`Player ${currentPlayer.color} has won`);
+            this.endGame();
+        }
     }
     setGamePhase() {
         if (this.gamePhase === 0) {
@@ -49,6 +53,9 @@ class Play {
         else {
             this.gamePhase = 0;
         }
+    }
+    endGame() {
+        this.gamePhase = 2;
     }
     getChosenFigureInput() {
         let figureId = prompt("Gib Nummer ein");
@@ -79,8 +86,9 @@ class Play {
         }
         else if (figureToMove.isOnField && targetPos > 40 && figureToMove.getMaxDistance(targetPos)) {
             figureToMove.moveOnPlayerBoard(rolledNum);
-            currentPlayer.addFigureInEndzone(figureToMove);
+            //currentPlayer.addFigureInEndzone(figureToMove);
             figureToMove.setIsInEndzone();
+            this.gameBoard.moveFigure(figureToMove, rolledNum);
         }
         else if (!figureToMove.isOnField) {
             figureToMove.placeOnField();
