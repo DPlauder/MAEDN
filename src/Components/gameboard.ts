@@ -48,10 +48,11 @@ class GameBoard{
         if(this.isOccupied(newPosition)){
             this.resetFigure(newPosition);            
         }
+        this.removeFigureStartPoint(figure);
         if(!figure.getIsInEndzone()){
             this.gameboard[newPosition] = figure;
         }
-        this.removeFigureStartPoint(figure);
+        
         
 
     }

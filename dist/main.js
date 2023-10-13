@@ -19,5 +19,4 @@ console.log(play);
 //TODO      3xRoll when no Figur on Board
 //TODO:     Figur spawn only on 6 
 //TODO      Extra Roll when 6 rolled
-//TODO      
 //# sourceMappingURL=main.js.map

@@ -3,6 +3,7 @@ import { GameCube } from "../Components/gamecube.js";
 import { GameBoard } from "../Components/gameboard.js";
 import { Figure } from "../Components/figure.js";
 import { GameBoardUi } from "../View/gameboardview.js";
+import { GameRules } from "./gamerules.js";
 
 class Play{
     public players: Player[]
@@ -11,6 +12,7 @@ class Play{
     public gameBoard: GameBoard;
     private gameBoardUi: GameBoardUi;
     private gamePhase: number;
+    private gameRules: GameRules;
 
     constructor(){
         this.gameBoard = new GameBoard();
@@ -20,6 +22,7 @@ class Play{
         this.gameBoardUi = new GameBoardUi();
         this.createNewGame();
         this.gamePhase = 0;
+        this.gameRules = new GameRules();
     }
 
     createNewGame(): void{
@@ -42,37 +45,28 @@ class Play{
         let idNum: number;
         const currentPlayer = this.getCurrentPlayer();
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
-        if(this.gamePhase === 0 && (element as HTMLElement).id === "gameCube"){
+        if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
-            this.setGamePhase();
-        } else if(this.gamePhase === 1){
-            idNum = this.getChosenFigureInput();
+            this.gameRules.setGamePhaseTwo();
+        } else if(this.gameRules.getGamePhase() === 1){
+            idNum = this.getChosenFigureInput(currentPlayer);
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
             this.gameBoardUi.updateGameboardPlayerBank(this.players);
             this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
-            this.setGamePhase(); 
+            this.gameRules.setGamePhaseOne();
         }
         if(currentPlayer.checkAllFiguresInEndzone()){
-            console.log(`Player ${currentPlayer.color} has won`);
-            
+            console.log(`Player ${currentPlayer.color} has won`);           
             this.endGame();
-        }
-         
+        }       
     }   
-    setGamePhase(): void{
-        if(this.gamePhase === 0){
-            this.gamePhase++;
-        } else{
-            this.gamePhase = 0;
-        }
-    }
     endGame(): void{
-        this.gamePhase = 2;
+        this.gameRules.setEndGame();
     }
 
-    getChosenFigureInput(): number{
-        let figureId = prompt("Gib Nummer ein");
+    getChosenFigureInput(currentPlayer: Player): number{
+        let figureId = prompt(`Player ${currentPlayer.color} choose a figure (0-3)`);
             if(figureId){
                 let idNum = parseInt(figureId);
                 return idNum;

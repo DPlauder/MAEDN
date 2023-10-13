@@ -1,6 +1,7 @@
 import { GameCube } from "../Components/gamecube.js";
 import { GameBoard } from "../Components/gameboard.js";
 import { GameBoardUi } from "../View/gameboardview.js";
+import { GameRules } from "./gamerules.js";
 class Play {
     constructor() {
         this.gameBoard = new GameBoard();
@@ -10,6 +11,7 @@ class Play {
         this.gameBoardUi = new GameBoardUi();
         this.createNewGame();
         this.gamePhase = 0;
+        this.gameRules = new GameRules();
     }
     createNewGame() {
         this.gameBoardUi.createGrid();
@@ -29,36 +31,28 @@ class Play {
         let idNum;
         const currentPlayer = this.getCurrentPlayer();
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
-        if (this.gamePhase === 0 && element.id === "gameCube") {
+        if (this.gameRules.getGamePhase() === 0 && element.id === "gameCube") {
             this.rollDice();
-            this.setGamePhase();
+            this.gameRules.setGamePhaseTwo();
         }
-        else if (this.gamePhase === 1) {
-            idNum = this.getChosenFigureInput();
+        else if (this.gameRules.getGamePhase() === 1) {
+            idNum = this.getChosenFigureInput(currentPlayer);
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
             this.gameBoardUi.updateGameboardPlayerBank(this.players);
             this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
-            this.setGamePhase();
+            this.gameRules.setGamePhaseOne();
         }
         if (currentPlayer.checkAllFiguresInEndzone()) {
             console.log(`Player ${currentPlayer.color} has won`);
             this.endGame();
         }
     }
-    setGamePhase() {
-        if (this.gamePhase === 0) {
-            this.gamePhase++;
-        }
-        else {
-            this.gamePhase = 0;
-        }
-    }
     endGame() {
-        this.gamePhase = 2;
+        this.gameRules.setEndGame();
     }
-    getChosenFigureInput() {
-        let figureId = prompt("Gib Nummer ein");
+    getChosenFigureInput(currentPlayer) {
+        let figureId = prompt(`Player ${currentPlayer.color} choose a figure (0-3)`);
         if (figureId) {
             let idNum = parseInt(figureId);
             return idNum;

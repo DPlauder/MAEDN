@@ -29,7 +29,7 @@ class Player{
         return myFiguresOnBank;
     }
     checkAllFiguresInEndzone(): boolean{
-        return this.myFigures.every(figure => figure.isInEndzone)
+        return this.myFigures.every(figure => figure.isInEndzone);
     }
 }
 
