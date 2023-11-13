@@ -1,4 +1,4 @@
-import { Figure } from "./figure.js";
+import { Figure } from "./figure";
 class GameBoard {
     constructor() {
         this.gameboard = Array(40).fill(0);

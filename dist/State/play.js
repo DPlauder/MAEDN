@@ -1,7 +1,7 @@
-import { GameCube } from "../Components/gamecube.js";
-import { GameBoard } from "../Components/gameboard.js";
-import { GameBoardUi } from "../View/gameboardview.js";
-import { GameRules } from "./gamerules.js";
+import { GameCube } from "../Components/gamecube";
+import { GameBoard } from "../Components/gameboard";
+import { GameBoardUi } from "../View/gameboardview";
+import { GameRules } from "./gamerules";
 class Play {
     constructor() {
         this.gameBoard = new GameBoard();

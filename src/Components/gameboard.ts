@@ -1,5 +1,5 @@
-import { Player } from "./player.js";
-import { Figure } from "./figure.js";
+import { Player } from "./player";
+import { Figure } from "./figure";
 
 
 class GameBoard{
@@ -53,8 +53,6 @@ class GameBoard{
             this.gameboard[newPosition] = figure;
         }
         
-        
-
     }
     removeFigureStartPoint(figure:Figure): void{
         const indexOfFigure = this.getIndexOfFigure(figure);

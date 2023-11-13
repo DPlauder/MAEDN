@@ -1,5 +1,5 @@
-import { Player } from "./Components/player.js";
-import { Play } from "./State/play.js";
+import { Player } from "./Components/player";
+import { Play } from "./State/play";
 //--------------------------------------------------AUSFÜHRUNG-----------------------------------------
 const play = new Play();
 const myPlayer1 = new Player("red");

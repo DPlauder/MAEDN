@@ -1,9 +1,9 @@
-import { Player } from "../Components/player.js";
-import { GameCube } from "../Components/gamecube.js";
-import { GameBoard } from "../Components/gameboard.js";
-import { Figure } from "../Components/figure.js";
-import { GameBoardUi } from "../View/gameboardview.js";
-import { GameRules } from "./gamerules.js";
+import { Player } from "../Components/player";
+import { GameCube } from "../Components/gamecube";
+import { GameBoard } from "../Components/gameboard";
+import { Figure } from "../Components/figure";
+import { GameBoardUi } from "../View/gameboardview";
+import { GameRules } from "./gamerules";
 
 class Play{
     public players: Player[]

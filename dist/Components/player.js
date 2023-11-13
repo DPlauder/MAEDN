@@ -1,4 +1,4 @@
-import { Figure } from "./figure.js";
+import { Figure } from "./figure";
 class Player {
     constructor(color) {
         this.color = color;

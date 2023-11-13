@@ -1,6 +1,6 @@
-import { PlayField } from "./playfield.js";
-import { PlayerZones } from "./playerZones.js";
-import { GameCubeUi } from "./gamecubeUi.js";
+import { PlayField } from "./playfield";
+import { PlayerZones } from "./playerZones";
+import { GameCubeUi } from "./gamecubeUi";
 class GameBoardUi {
     constructor() {
         this.playField = new PlayField();

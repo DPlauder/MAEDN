@@ -1,4 +1,4 @@
-import { Figure } from "./figure.js";
+import { Figure } from "./figure";
 
 class Endzone{
     private endZone: number[] | Figure[];
