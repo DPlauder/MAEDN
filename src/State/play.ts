@@ -23,6 +23,7 @@ class Play{
         this.createNewGame();
         this.gamePhase = 0;
         this.gameRules = new GameRules();
+
     }
 
     createNewGame(): void{
@@ -37,8 +38,10 @@ class Play{
         const grid = document.getElementById('playField') as HTMLDivElement;
         this.gameBoardUi.updateGameboardPlayerBank(this.players);
         grid.addEventListener('click', (e) => {
+            //console.log("hallo target", e.target);  
             this.checkGamePhase(e.target);
-            this.gameBoardUi.updateGameBoardUi(this.gameBoard);
+            this.gameBoardUi.updateGameBoardUi(this.gameBoard);  
+           
         })
     }
     checkGamePhase(element: EventTarget | null){
@@ -48,13 +51,14 @@ class Play{
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
             this.gameRules.setGamePhaseTwo();
-        } else if(this.gameRules.getGamePhase() === 1){
-            idNum = this.getChosenFigureInput(currentPlayer);
+        } else if(this.gameRules.getGamePhase() === 1){            
+            idNum = this.getChosenFigureId(currentPlayer, (element as HTMLDivElement));
             this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
             this.gameBoardUi.updateGameboardPlayerBank(this.players);
             this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
             this.nextTurn();
             this.gameRules.setGamePhaseOne();
+            
         }
         if(currentPlayer.checkAllFiguresInEndzone()){
             console.log(`Player ${currentPlayer.color} has won`);           
@@ -65,13 +69,26 @@ class Play{
         this.gameRules.setEndGame();
     }
 
-    getChosenFigureInput(currentPlayer: Player): number{
-        let figureId = prompt(`Player ${currentPlayer.color} choose a figure (0-3)`);
-            if(figureId){
-                let idNum = parseInt(figureId);
-                return idNum;
-            }
-            return 0;
+    getChosenFigureId(currentPlayer: Player, element: EventTarget): number{
+        let figureId = 0;
+        
+        if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure1`)){
+            console.log('test1');         
+            figureId = 0;
+        } else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure2`)){
+            console.log('test2');
+            figureId = 1;
+            
+        }
+        else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure3`)){
+            console.log('test3');
+            figureId =  2;
+        }
+        else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure4`)) {
+            console.log('test4');
+            figureId = 3;
+        }
+        return figureId        
     }
 
     getCurrentPlayer(): Player{

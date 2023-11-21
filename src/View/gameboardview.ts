@@ -35,15 +35,21 @@ class GameBoardUi{
             }
         }
     }
-    updateGameBoardUi(gameBoard: GameBoard){
+    updateGameBoardUi(gameBoard: GameBoard){       
         for(let i = 0; i < gameBoard.gameboard.length; i++){
-            const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;                       
-            if(gameBoard.gameboard[i] != 0){
-                playField.classList.toggle(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
-            } else if (gameBoard.gameboard[i] === 0){
-                playField.classList.toggle(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
+            const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;          
+            if(typeof(gameBoard.gameboard[i]) === 'object'){
+                playField.classList.add(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
+                playField.classList.add(`figure`);
+                playField.classList.add(`${(gameBoard.gameboard[i] as Figure).color}Figure${(gameBoard.gameboard[i] as Figure).id}`);
+            } else if(typeof(gameBoard.gameboard[i]) == 'number'){
+                console.log('hallo number');
+                playField.classList.remove(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
+                playField.classList.remove(`figure`);
+                playField.classList.remove(`${(gameBoard.gameboard[i] as Figure).color}Figure${(gameBoard.gameboard[i] as Figure).id}`);
             }
-        }       
+        }
+             
     }
 
     updateGameboardPlayerBank(players: Player[]){
@@ -54,8 +60,13 @@ class GameBoardUi{
                     const bankElement = document.getElementById(`${element.color}Bank-${i}`) as HTMLDivElement;
                     if(myFiguresOnBank.includes(i)){
                         bankElement.classList.add(`${element.color}Figure`);
+                        bankElement.classList.add(`figure`);
+                        bankElement.classList.add(`${element.color}Figure${i}`);
+                        
                     } else{
                         bankElement.classList.remove(`${element.color}Figure`);
+                        bankElement.classList.remove(`figure`);
+                        bankElement.classList.remove(`${element.color}Figure${i}`);
                     }                                  
                 }
             }
