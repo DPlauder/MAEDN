@@ -73,19 +73,19 @@ class Play{
         let figureId = 0;
         
         if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure1`)){
-            console.log('test1');         
+            //console.log('test1');         
             figureId = 0;
         } else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure2`)){
-            console.log('test2');
+            //console.log('test2');
             figureId = 1;
             
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure3`)){
-            console.log('test3');
+            //console.log('test3');
             figureId =  2;
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure4`)) {
-            console.log('test4');
+            //console.log('test4');
             figureId = 3;
         }
         return figureId        

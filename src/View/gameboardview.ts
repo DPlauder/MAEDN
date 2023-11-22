@@ -37,17 +37,17 @@ class GameBoardUi{
     }
     updateGameBoardUi(gameBoard: GameBoard){       
         for(let i = 0; i < gameBoard.gameboard.length; i++){
-            const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;          
+            const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;  
+
             if(typeof(gameBoard.gameboard[i]) === 'object'){
                 playField.classList.add(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
                 playField.classList.add(`figure`);
                 playField.classList.add(`${(gameBoard.gameboard[i] as Figure).color}Figure${(gameBoard.gameboard[i] as Figure).id}`);
-            } else if(typeof(gameBoard.gameboard[i]) == 'number'){
-                console.log('hallo number');
-                playField.classList.remove(`${(gameBoard.gameboard[i] as Figure).color}Figure`);
-                playField.classList.remove(`figure`);
-                playField.classList.remove(`${(gameBoard.gameboard[i] as Figure).color}Figure${(gameBoard.gameboard[i] as Figure).id}`);
             }
+            else if(typeof(gameBoard.gameboard[i]) === 'number'){
+                playField.className = "playContainer";
+
+            } 
         }
              
     }
