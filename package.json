@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "wp-dev": "webpack --mode development --watch",
     "start": "dev-server"
   },
   "repository": {
