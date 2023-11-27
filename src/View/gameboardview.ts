@@ -50,6 +50,18 @@ class GameBoardUi {
         playField.classList.add(`figure`);
         playField.classList.add(`${figure.color}Figure${figure.id}`);
       }
+      if(playField.id === "playfield-0"){
+        playField.classList.add("redZone")
+      }
+      if(playField.id === "playfield-10"){
+        playField.classList.add("blueZone")
+      }
+      if(playField.id === "playfield-20"){
+        playField.classList.add("greenZone")
+      }
+      if(playField.id === "playfield-30"){
+        playField.classList.add("yellowZone")
+      }
     }
   }
 
