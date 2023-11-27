@@ -45,7 +45,7 @@ class Play{
         })
     }
     checkGamePhase(element: EventTarget | null){
-        let idNum: number;
+        let idNum: number | null;
         const currentPlayer = this.getCurrentPlayer();
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
@@ -53,12 +53,13 @@ class Play{
             this.gameRules.setGamePhaseTwo();
         } else if(this.gameRules.getGamePhase() === 1){            
             idNum = this.getChosenFigureId(currentPlayer, (element as HTMLDivElement));
-            this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
-            this.gameBoardUi.updateGameboardPlayerBank(this.players);
-            this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
-            this.nextTurn();
-            this.gameRules.setGamePhaseOne();
-            
+            if(typeof(idNum) == "number"){
+                this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
+                this.gameBoardUi.updateGameboardPlayerBank(this.players);
+                this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
+                this.nextTurn();
+                this.gameRules.setGamePhaseOne();
+            }         
         }
         if(currentPlayer.checkAllFiguresInEndzone()){
             console.log(`Player ${currentPlayer.color} has won`);           
@@ -69,26 +70,26 @@ class Play{
         this.gameRules.setEndGame();
     }
 
-    getChosenFigureId(currentPlayer: Player, element: EventTarget): number{
-        let figureId = 0;
+    getChosenFigureId(currentPlayer: Player, element: EventTarget): number | null{
+        let figureId = null;
         
         if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure1`)){
             //console.log('test1');         
-            figureId = 0;
+            return figureId = 0;
         } else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure2`)){
             //console.log('test2');
-            figureId = 1;
+            return figureId = 1;
             
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure3`)){
             //console.log('test3');
-            figureId =  2;
+            return figureId =  2;
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure4`)) {
             //console.log('test4');
-            figureId = 3;
+            return figureId = 3;
         }
-        return figureId        
+        return figureId;
     }
 
     getCurrentPlayer(): Player{
