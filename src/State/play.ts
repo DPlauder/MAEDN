@@ -49,7 +49,17 @@ class Play{
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
-            this.gameRules.setGamePhaseTwo();
+            //TODO Abfrage für 3x Würfeln wenn keine Figur ***NOCH NICHT FERTIG***
+            if(!currentPlayer.checkFiguresOnFiled() || this.gameCube.checkFor6() || this.gameRules.getNoFigureOnFieldAttempts() >= 3){
+                this.gameRules.setGamePhaseTwo();
+                this.gameRules.resetNoFigureOnFieldAttempts();
+                console.log('hello if next phase');
+                
+            } else{
+                this.gameRules.addNoFigureOnFieldAttempts();
+                console.log('hello if next attempt');
+            }
+
         } else if(this.gameRules.getGamePhase() === 1){            
             idNum = this.getChosenFigureId(currentPlayer, (element as HTMLDivElement));
             if(typeof(idNum) == "number"){
@@ -126,8 +136,6 @@ class Play{
         }
         if(this.gameCube.checkFor6()){
             this.currentPlayerIndex -= 1;
-            console.log('hello 6');
-            
         }
     }
     isGameEnd(player: Player): boolean{

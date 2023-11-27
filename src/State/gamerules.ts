@@ -1,4 +1,5 @@
 import { Player } from "../Components/player";
+import { GameCube } from "../Components/gamecube";
 
 class GameRules{
     private gamePhase: number;
@@ -19,6 +20,15 @@ class GameRules{
     }
     setEndGame(){
         this.gamePhase = 3;
+    }
+    addNoFigureOnFieldAttempts(){
+        this.attempt++;
+    }
+    getNoFigureOnFieldAttempts(){
+        return this.attempt;
+    }
+    resetNoFigureOnFieldAttempts(){
+        this.attempt = 0;
     }
 }
 

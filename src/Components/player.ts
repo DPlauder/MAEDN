@@ -31,8 +31,8 @@ class Player{
     checkAllFiguresInEndzone(): boolean{
         return this.myFigures.every(figure => figure.isInEndzone);
     }
-    checkFiguresOnFiled(){
-        return this.myFigures.every(figure => !figure.isOnField)
+    checkFiguresOnFiled(): boolean{
+        return this.myFigures.every(figure => figure.isOnField)
     }
 }
 
