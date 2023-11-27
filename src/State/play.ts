@@ -11,7 +11,6 @@ class Play{
     public gameCube: GameCube;
     public gameBoard: GameBoard;
     private gameBoardUi: GameBoardUi;
-    private gamePhase: number;
     private gameRules: GameRules;
 
     constructor(){
@@ -21,7 +20,6 @@ class Play{
         this.gameCube = new GameCube();
         this.gameBoardUi = new GameBoardUi();
         this.createNewGame();
-        this.gamePhase = 0;
         this.gameRules = new GameRules();
 
     }
@@ -37,8 +35,7 @@ class Play{
     playGame(): void{       
         const grid = document.getElementById('playField') as HTMLDivElement;
         this.gameBoardUi.updateGameboardPlayerBank(this.players);
-        grid.addEventListener('click', (e) => {
-            //console.log("hallo target", e.target);  
+        grid.addEventListener('click', (e) => { 
             this.checkGamePhase(e.target);
             this.gameBoardUi.updateGameBoardUi(this.gameBoard);  
            
@@ -47,7 +44,7 @@ class Play{
     checkGamePhase(element: EventTarget | null){
         let idNum: number | null;
         const currentPlayer = this.getCurrentPlayer();
-        this.gameBoardUi.updateGameBoardUi(this.gameBoard);
+        //this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
             this.gameRules.setGamePhaseTwo();
