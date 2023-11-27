@@ -37,8 +37,7 @@ class Play{
     playGame(): void{       
         const grid = document.getElementById('playField') as HTMLDivElement;
         this.gameBoardUi.updateGameboardPlayerBank(this.players);
-        grid.addEventListener('click', (e) => {
-            //console.log("hallo target", e.target);  
+        grid.addEventListener('click', (e) => { 
             this.checkGamePhase(e.target);
             this.gameBoardUi.updateGameBoardUi(this.gameBoard);  
            
@@ -124,6 +123,11 @@ class Play{
             this.gameBoard.placeFigure(currentPlayer, figureToMove);
         } else{
             console.log("Fehler moveCurrentPlayerFigure");            
+        }
+        if(this.gameCube.checkFor6()){
+            this.currentPlayerIndex -= 1;
+            console.log('hello 6');
+            
         }
     }
     isGameEnd(player: Player): boolean{

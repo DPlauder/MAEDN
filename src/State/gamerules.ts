@@ -1,8 +1,12 @@
+import { Player } from "../Components/player";
+
 class GameRules{
     private gamePhase: number;
+    private attempt: number;
 
     constructor(){
         this.gamePhase = 0;
+        this.attempt = 0;
     }
     getGamePhase(){
         return this.gamePhase;
