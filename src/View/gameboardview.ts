@@ -41,22 +41,14 @@ class GameBoardUi {
     //irgendwie muss hier die Information herkommen, welche Figur bzw. farbe aktuell gespielt wird.
     //ansonsten hast du eh schon die Lösung mit plyField.className = "playContainer";
     for (let i = 0; i < gameBoard.gameboard.length; i++) {
+
       const figure = gameBoard.gameboard[i] as Figure;
-      const playField = document.getElementById(
-        `playfield-${i}`
-      ) as HTMLDivElement;
-      console.log("hi from updateGameBoardUi");
+      const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;
+      playField.className = "playContainer";
       if (gameBoard.gameboard[i] !== 0) {
-        console.log("hie form if");
         playField.classList.add(`${figure.color}Figure`);
         playField.classList.add(`figure`);
         playField.classList.add(`${figure.color}Figure${figure.id}`);
-      } else {
-        //playField.className = "playContainer";
-        //zu diesem zeitpunkt ist color undefined. Am Gameboard ist schon 0 eingetragen und nicht das Objekt
-        playField.classList.remove(`${figure.color}Figure`);
-        playField.classList.remove(`figure`);
-        playField.classList.remove(`${figure.color}Figure${figure.id}`);
       }
     }
   }
