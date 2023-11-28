@@ -53,11 +53,9 @@ class Play{
             if(!currentPlayer.checkFiguresOnFiled() || this.gameCube.checkFor6() || this.gameRules.getNoFigureOnFieldAttempts() >= 3){
                 this.gameRules.setGamePhaseTwo();
                 this.gameRules.resetNoFigureOnFieldAttempts();
-                console.log('hello if next phase');
-                
+             
             } else{
                 this.gameRules.addNoFigureOnFieldAttempts();
-                console.log('hello if next attempt');
             }
 
         } else if(this.gameRules.getGamePhase() === 1){            
@@ -106,7 +104,7 @@ class Play{
     }
 
     nextTurn(): void{
-        if(!this.gameCube.checkFor6()){
+        if(!this.gameRules.handleGameCube6(this.gameCube)){
             this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
         }
     }

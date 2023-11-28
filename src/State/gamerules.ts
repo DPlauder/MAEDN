@@ -30,6 +30,12 @@ class GameRules{
     resetNoFigureOnFieldAttempts(){
         this.attempt = 0;
     }
+    handleGameCube6(gamecube: GameCube): boolean{
+        if(gamecube.checkFor6()){
+            this.resetNoFigureOnFieldAttempts();
+        }
+        return gamecube.checkFor6();
+    }
 }
 
 export{GameRules};
