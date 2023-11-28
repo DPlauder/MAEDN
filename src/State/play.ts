@@ -106,7 +106,9 @@ class Play{
     }
 
     nextTurn(): void{
-        this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        if(!this.gameCube.checkFor6()){
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        }
     }
 
     rollDice(): void{ 
@@ -134,9 +136,7 @@ class Play{
         } else{
             console.log("Fehler moveCurrentPlayerFigure");            
         }
-        if(this.gameCube.checkFor6()){
-            this.currentPlayerIndex -= 1;
-        }
+        
     }
     isGameEnd(player: Player): boolean{
         return player.checkAllFiguresInEndzone();
