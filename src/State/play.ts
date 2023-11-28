@@ -106,7 +106,15 @@ class Play{
     }
 
     nextTurn(): void{
-        if(!this.gameCube.checkFor6()){
+        const currentPlayer = this.getCurrentPlayer();
+        console.log(this.gameCube.checkFor6());
+        console.log(this.gameRules.getNoFigureOnFieldAttempts() <= 3);
+        console.log(currentPlayer.checkFiguresOnFiled());
+        
+        
+        
+        if(this.gameCube.checkFor6()){
+            console.log('hello 6 condition');        
             this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
         }
     }
