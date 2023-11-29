@@ -36,12 +36,7 @@ class GameBoardUi {
     }
   }
   updateGameBoardUi(gameBoard: GameBoard) {
-    //Das Gameboard ist hier schon aktualisiert, deshalb funktioniert die else anweisung nicht
-    //Am Gameboard ist schon 0 eingetragen und nicht das Objekt
-    //irgendwie muss hier die Information herkommen, welche Figur bzw. farbe aktuell gespielt wird.
-    //ansonsten hast du eh schon die Lösung mit plyField.className = "playContainer";
     for (let i = 0; i < gameBoard.gameboard.length; i++) {
-
       const figure = gameBoard.gameboard[i] as Figure;
       const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;
       playField.className = "playContainer";
@@ -97,6 +92,9 @@ class GameBoardUi {
         endzoneElement.classList.remove(`${player.color}Figure`);
       }
     }
+  }
+  whoTurnShow(){
+    
   }
 }
 
