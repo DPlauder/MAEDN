@@ -1,8 +1,13 @@
+import { Player } from "../Components/player";
+import { GameCube } from "../Components/gamecube";
+
 class GameRules{
     private gamePhase: number;
+    private attempt: number;
 
     constructor(){
         this.gamePhase = 0;
+        this.attempt = 0;
     }
     getGamePhase(){
         return this.gamePhase;
@@ -15,6 +20,21 @@ class GameRules{
     }
     setEndGame(){
         this.gamePhase = 3;
+    }
+    addNoFigureOnFieldAttempts(){
+        this.attempt++;
+    }
+    getNoFigureOnFieldAttempts(){
+        return this.attempt;
+    }
+    resetNoFigureOnFieldAttempts(){
+        this.attempt = 0;
+    }
+    handleGameCube6(gamecube: GameCube): boolean{
+        if(gamecube.checkFor6()){
+            this.resetNoFigureOnFieldAttempts();
+        }
+        return gamecube.checkFor6();
     }
 }
 

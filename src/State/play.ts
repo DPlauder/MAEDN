@@ -37,8 +37,7 @@ class Play{
     playGame(): void{       
         const grid = document.getElementById('playField') as HTMLDivElement;
         this.gameBoardUi.updateGameboardPlayerBank(this.players);
-        grid.addEventListener('click', (e) => {
-            //console.log("hallo target", e.target);  
+        grid.addEventListener('click', (e) => { 
             this.checkGamePhase(e.target);
             this.gameBoardUi.updateGameBoardUi(this.gameBoard);  
            
@@ -50,7 +49,15 @@ class Play{
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
-            this.gameRules.setGamePhaseTwo();
+            //TODO Abfrage für 3x Würfeln wenn keine Figur ***NOCH NICHT FERTIG***
+            if(!currentPlayer.checkFiguresOnFiled() || this.gameCube.checkFor6() || this.gameRules.getNoFigureOnFieldAttempts() >= 3){
+                this.gameRules.setGamePhaseTwo();
+                this.gameRules.resetNoFigureOnFieldAttempts();
+             
+            } else{
+                this.gameRules.addNoFigureOnFieldAttempts();
+            }
+
         } else if(this.gameRules.getGamePhase() === 1){            
             idNum = this.getChosenFigureId(currentPlayer, (element as HTMLDivElement));
             if(typeof(idNum) == "number"){
@@ -97,7 +104,9 @@ class Play{
     }
 
     nextTurn(): void{
-        this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        if(!this.gameRules.handleGameCube6(this.gameCube)){
+            this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.players.length;
+        }
     }
 
     rollDice(): void{ 
@@ -125,6 +134,7 @@ class Play{
         } else{
             console.log("Fehler moveCurrentPlayerFigure");            
         }
+        
     }
     isGameEnd(player: Player): boolean{
         return player.checkAllFiguresInEndzone();
