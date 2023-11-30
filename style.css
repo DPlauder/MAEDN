@@ -73,6 +73,7 @@
 }
 .yellowFigure{
     background-color: yellow;
+
 }
 .greenFigure{
     background-color: greenyellow;
@@ -86,5 +87,14 @@
 .noFigure{
     background-color: white;
 }
+.playerTurn{
+    animation-name: pulsate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
 
+@keyframes pulsate{
+    0%{scale: 100%;}
+    100%{scale: 110%;}
+}
 

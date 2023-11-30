@@ -49,6 +49,7 @@ class Play{
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
+            this.gameBoardUi.highlightFiguresToMove(currentPlayer);
             //TODO Abfrage für 3x Würfeln wenn keine Figur ***NOCH NICHT FERTIG***
             if(!currentPlayer.checkFiguresOnFiled() || this.gameCube.checkFor6() || this.gameRules.getNoFigureOnFieldAttempts() >= 3){
                 this.gameRules.setGamePhaseTwo();
@@ -66,7 +67,8 @@ class Play{
                 this.gameBoardUi.updateGameBoardPlayerEndzone(this.getCurrentPlayer());
                 this.nextTurn();
                 this.gameRules.setGamePhaseOne();
-            }         
+                this.gameBoardUi.unlightFiguresToMove(currentPlayer);
+            }      
         }
         if(currentPlayer.checkAllFiguresInEndzone()){
             console.log(`Player ${currentPlayer.color} has won`);           
@@ -80,20 +82,16 @@ class Play{
     getChosenFigureId(currentPlayer: Player, element: EventTarget): number | null{
         let figureId = null;
         
-        if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure1`)){
-            //console.log('test1');         
+        if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure1`)){       
             return figureId = 0;
         } else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure2`)){
-            //console.log('test2');
             return figureId = 1;
             
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure3`)){
-            //console.log('test3');
             return figureId =  2;
         }
         else if((element as HTMLDivElement).classList.contains(`${currentPlayer.color}Figure4`)) {
-            //console.log('test4');
             return figureId = 3;
         }
         return figureId;
