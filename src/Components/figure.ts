@@ -35,6 +35,7 @@ class Figure{
     getMaxDistance(newPos: number): boolean{
         return newPos <= 44;
     }
+
 }
 
 export {Figure};

@@ -36,6 +36,15 @@ class GameRules{
         }
         return gamecube.checkFor6();
     }
+    checkCanMoveOnThrow(gamecube: GameCube, currentPlayer: Player):boolean{
+        if(currentPlayer.checkFiguresOnFieled()){
+            return true
+        }else if(gamecube.checkFor6()){
+            return true
+        } else{
+            return false;
+        }
+    }
 }
 
 export{GameRules};

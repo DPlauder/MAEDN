@@ -49,14 +49,10 @@ class Play{
         this.gameBoardUi.updateGameBoardUi(this.gameBoard);
         if(this.gameRules.getGamePhase() === 0 && (element as HTMLElement).id === "gameCube"){
             this.rollDice();
-            this.gameBoardUi.highlightFiguresToMove(currentPlayer);
-            //TODO Abfrage für 3x Würfeln wenn keine Figur ***NOCH NICHT FERTIG***
-            if(!currentPlayer.checkFiguresOnFiled() || this.gameCube.checkFor6() || this.gameRules.getNoFigureOnFieldAttempts() >= 3){
+            if(this.gameRules.checkCanMoveOnThrow(this.gameCube, currentPlayer)){
+                this.gameBoardUi.highlightFiguresToMove(currentPlayer);
                 this.gameRules.setGamePhaseTwo();
-                this.gameRules.resetNoFigureOnFieldAttempts();
-             
-            } else{
-                this.gameRules.addNoFigureOnFieldAttempts();
+                console.log('hello check');
             }
 
         } else if(this.gameRules.getGamePhase() === 1){            
@@ -124,7 +120,8 @@ class Play{
         } else if(figureToMove.isOnField && targetPos > 40 && figureToMove.getMaxDistance(targetPos)){
             figureToMove.moveOnPlayerBoard(rolledNum);
             //currentPlayer.addFigureInEndzone(figureToMove);
-            figureToMove.setIsInEndzone()
+            figureToMove.setIsInEndzone();
+            figureToMove.removeFromField();
             this.gameBoard.moveFigure(figureToMove, rolledNum);
         } else if (!figureToMove.isOnField){
             figureToMove.placeOnField();

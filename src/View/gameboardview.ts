@@ -95,11 +95,8 @@ class GameBoardUi {
   }
   highlightFiguresToMove(currentPlayer: Player){
     const figuresToMove = document.querySelectorAll(`.${currentPlayer.color}Figure`)
-    console.log(figuresToMove); 
     figuresToMove.forEach(element => {
       element.classList.add('playerTurn');
-      console.log('hello light');
-      
     });    
   }
   unlightFiguresToMove(currentPlayer:Player){
