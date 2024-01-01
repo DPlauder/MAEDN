@@ -1,38 +1,33 @@
 import { Player } from "./Components/player";
 import { Play } from "./State/play";
+import { StartScreen } from "./View/startscreen";
 
 //--------------------------------------------------AUSFÜHRUNG-----------------------------------------
-const play = new Play();
-const myPlayer1 = new Player("red");
-play.addPlayer(myPlayer1);
+const start = new StartScreen();
+const startButton = document.getElementById("startButton");
 
-const myPlayer2 = new Player("blue");
-play.addPlayer(myPlayer2);
+startButton!.addEventListener("click", () => {
+  console.log("hello start");
 
-const myPlayer3 = new Player("green");
-play.addPlayer(myPlayer3);
+  const play = new Play(start);
+  const myPlayer1 = new Player("red");
+  play.addPlayer(myPlayer1);
 
-const myPlayer4 = new Player("yellow");
-play.addPlayer(myPlayer4);
+  const myPlayer2 = new Player("blue");
+  play.addPlayer(myPlayer2);
 
+  const myPlayer3 = new Player("green");
+  play.addPlayer(myPlayer3);
 
-play.playGame();
+  const myPlayer4 = new Player("yellow");
+  play.addPlayer(myPlayer4);
 
-
-
-
-
-console.log(play);
-
-
-
+  play.playGame();
+});
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //TODO:     show Figures Endzone(movement)
 //TODO      Errorhandler when all figures on field
 
 //-----------------------------------------------------------------------
-//TODO      3xRoll when no Figur on Board
-//TODO:     Figur spawn only on 6 
-//TODO      Extra Roll when 6 rolled
-
+//TODO:     Figur spawn only on 6
