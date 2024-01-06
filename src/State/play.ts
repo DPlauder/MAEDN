@@ -49,8 +49,8 @@ class Play {
     let idNum: number | null;
     const currentPlayer = this.getCurrentPlayer();
     console.log("player ", currentPlayer);
-
     this.gameBoardUi.updateGameBoardUi(this.gameBoard);
+    //gamephase 1 | würfeln
     if (
       this.gameRules.getGamePhase() === 0 &&
       (element as HTMLElement).id === "gameCube"
@@ -66,7 +66,9 @@ class Play {
         this.gameRules.resetNoFigureOnFieldAttempts();
         this.nextTurn();
       }
-    } else if (this.gameRules.getGamePhase() === 1) {
+    }
+    //gamephase 2 | Figurebewegung
+    else if (this.gameRules.getGamePhase() === 1) {
       idNum = this.getChosenFigureId(currentPlayer, element as HTMLDivElement);
       if (typeof idNum == "number") {
         this.moveCurrentPlayerFigure(currentPlayer.myFigures[idNum]);
@@ -132,14 +134,25 @@ class Play {
   }
 
   rollDice(): void {
-    const getCurrentPlayer = this.getCurrentPlayer();
     this.gameCube.rollCube();
     this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
+    //const getCurrentPlayer = this.getCurrentPlayer();
+    //TODO Würfelanimatione, Zug geht verloren wenn 6
+    /* 
+    for (let i = 0; i < 10; i++) {
+      this.rollTimeout(i);
+    } */
+  } /* 
+  rollTimeout(i: number) {
+    setTimeout(() => {
+      this.gameCube.rollCube();
+      this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
+    }, 40 * i);
   }
-
+ */
   moveCurrentPlayerFigure(figureToMove: Figure): void {
     const currentPlayer = this.getCurrentPlayer();
-    const rolledNum = this.gameCube.rolledNum;
+    const rolledNum = this.gameCube.getRolledNum();
     const targetPos = rolledNum + figureToMove.position;
 
     if (
