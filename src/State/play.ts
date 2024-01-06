@@ -134,22 +134,33 @@ class Play {
   }
 
   rollDice(): void {
+    /* 
     this.gameCube.rollCube();
-    this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
+    this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum); */
     //const getCurrentPlayer = this.getCurrentPlayer();
     //TODO Würfelanimatione, Zug geht verloren wenn 6
-    /* 
-    for (let i = 0; i < 10; i++) {
-      this.rollTimeout(i);
-    } */
-  } /* 
-  rollTimeout(i: number) {
-    setTimeout(() => {
+    this.gameCube.rollCube();
+    let rolledNum: number = this.gameCube.getRolledNum();
+
+    const interval = setInterval(() => {
       this.gameCube.rollCube();
       this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
-    }, 40 * i);
+      console.log("interval", this.gameCube.getRolledNum());
+    }, 50);
+    console.log(rolledNum);
+    setTimeout(() => clearInterval(interval), 1000);
+    this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
+    console.log(rolledNum);
+
+    //this.gameBoardUi.gameCubeUi.showGameCubeNum(rolledNum);
+    /* for (let i = 0; i < 10; i++) {
+      this.rollTimeout(i);
+    } */
   }
- */
+  rollTimeout(i: number) {
+    setTimeout(() => {}, 40 * i);
+  }
+
   moveCurrentPlayerFigure(figureToMove: Figure): void {
     const currentPlayer = this.getCurrentPlayer();
     const rolledNum = this.gameCube.getRolledNum();
