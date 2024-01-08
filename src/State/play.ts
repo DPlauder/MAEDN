@@ -133,7 +133,7 @@ class Play {
     }
   }
 
-  rollDice(): void {
+  async rollDice(): Promise<void> {
     /* 
     this.gameCube.rollCube();
     this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum); */
@@ -142,15 +142,24 @@ class Play {
     this.gameCube.rollCube();
     let rolledNum: number = this.gameCube.getRolledNum();
 
-    const interval = setInterval(() => {
-      this.gameCube.rollCube();
-      this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
-      console.log("interval", this.gameCube.getRolledNum());
-    }, 50);
-    console.log(rolledNum);
-    setTimeout(() => clearInterval(interval), 1000);
-    this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
-    console.log(rolledNum);
+    const helper = () => {
+      const interval = setInterval(() => {
+        this.gameCube.rollCube();
+        this.gameBoardUi.gameCubeUi.showGameCubeNum(
+          this.gameCube.getRolledNum()
+        );
+        console.log("interval", this.gameCube.getRolledNum());
+      }, 50);
+      console.log(rolledNum);
+      setTimeout(() => {
+        clearInterval(interval);
+        this.gameBoardUi.gameCubeUi.showGameCubeNum(
+          this.gameCube.getRolledNum()
+        );
+        console.log("after intervall", rolledNum);
+      }, 1000);
+    };
+    helper();
 
     //this.gameBoardUi.gameCubeUi.showGameCubeNum(rolledNum);
     /* for (let i = 0; i < 10; i++) {
