@@ -24,7 +24,7 @@ class Player {
   getFiguresOnBank() {
     let myFiguresOnBank: number[] = [];
     this.myFigures.forEach((element) => {
-      if (!element.isOnField) {
+      if (!element.isOnField && !element.isInEndzone) {
         myFiguresOnBank.push(element.id);
       }
     });

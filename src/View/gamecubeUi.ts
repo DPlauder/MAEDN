@@ -22,7 +22,7 @@ class GameCubeUi {
     ) as HTMLDivElement;
     gameCubeFrontend.innerHTML = `${rolledNum}`;
   }
-  async diceAnimation(rolledNum: number): Promise<void> {
+  diceAnimation(rolledNum: number) {
     let number = 0;
     const helper = () => {
       const interval = setInterval(() => {

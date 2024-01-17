@@ -38,24 +38,26 @@ class GameBoardUi {
   updateGameBoardUi(gameBoard: GameBoard) {
     for (let i = 0; i < gameBoard.gameboard.length; i++) {
       const figure = gameBoard.gameboard[i] as Figure;
-      const playField = document.getElementById(`playfield-${i}`) as HTMLDivElement;
+      const playField = document.getElementById(
+        `playfield-${i}`
+      ) as HTMLDivElement;
       playField.className = "playContainer";
       if (gameBoard.gameboard[i] !== 0) {
         playField.classList.add(`${figure.color}Figure`);
         playField.classList.add(`figure`);
         playField.classList.add(`${figure.color}Figure${figure.id}`);
       }
-      if(playField.id === "playfield-0"){
-        playField.classList.add("redZone")
+      if (playField.id === "playfield-0") {
+        playField.classList.add("redZone");
       }
-      if(playField.id === "playfield-10"){
-        playField.classList.add("blueZone")
+      if (playField.id === "playfield-10") {
+        playField.classList.add("blueZone");
       }
-      if(playField.id === "playfield-20"){
-        playField.classList.add("greenZone")
+      if (playField.id === "playfield-20") {
+        playField.classList.add("greenZone");
       }
-      if(playField.id === "playfield-30"){
-        playField.classList.add("yellowZone")
+      if (playField.id === "playfield-30") {
+        playField.classList.add("yellowZone");
       }
     }
   }
@@ -93,16 +95,18 @@ class GameBoardUi {
       }
     }
   }
-  highlightFiguresToMove(currentPlayer: Player){
-    const figuresToMove = document.querySelectorAll(`.${currentPlayer.color}Figure`)
-    figuresToMove.forEach(element => {
-      element.classList.add('playerTurn');
-    });    
+  highlightFiguresToMove(currentPlayer: Player) {
+    const figuresToMove = document.querySelectorAll(
+      `.${currentPlayer.color}Figure`
+    );
+    figuresToMove.forEach((element) => {
+      element.classList.add("playerTurn");
+    });
   }
-  unlightFiguresToMove(currentPlayer:Player){
-    document.querySelectorAll(`.playContainer`).forEach(element => {
-      element.classList.remove('playerTurn');
-    });    
+  unlightFiguresToMove(currentPlayer: Player) {
+    document.querySelectorAll(`.playContainer`).forEach((element) => {
+      element.classList.remove("playerTurn");
+    });
   }
 }
 

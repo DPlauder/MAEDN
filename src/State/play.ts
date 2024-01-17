@@ -156,9 +156,9 @@ class Play {
       figureToMove.getMaxDistance(targetPos)
     ) {
       figureToMove.moveOnPlayerBoard(rolledNum);
-      //currentPlayer.addFigureInEndzone(figureToMove);
-      figureToMove.setIsInEndzone();
+      currentPlayer.addFigureInEndzone(figureToMove);
       figureToMove.removeFromField();
+      figureToMove.setIsInEndzone(targetPos);
       this.gameBoard.moveFigure(figureToMove, rolledNum);
     } else if (!figureToMove.isOnField) {
       figureToMove.placeOnField();
