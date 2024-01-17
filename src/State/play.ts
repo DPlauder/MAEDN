@@ -135,21 +135,9 @@ class Play {
 
   rollDice(): void {
     this.gameCube.rollCube();
-    this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.rolledNum);
-    //const getCurrentPlayer = this.getCurrentPlayer();
-    //TODO Würfelanimatione, Zug geht verloren wenn 6
-    /* 
-    for (let i = 0; i < 10; i++) {
-      this.rollTimeout(i);
-    } */
-  } /* 
-  rollTimeout(i: number) {
-    setTimeout(() => {
-      this.gameCube.rollCube();
-      this.gameBoardUi.gameCubeUi.showGameCubeNum(this.gameCube.getRolledNum());
-    }, 40 * i);
+    this.gameBoardUi.gameCubeUi.diceAnimation(this.gameCube.getRolledNum());
   }
- */
+
   moveCurrentPlayerFigure(figureToMove: Figure): void {
     const currentPlayer = this.getCurrentPlayer();
     const rolledNum = this.gameCube.getRolledNum();
@@ -185,3 +173,4 @@ class Play {
 }
 
 export { Play };
+const newItem = 0;

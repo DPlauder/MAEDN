@@ -22,6 +22,21 @@ class GameCubeUi {
     ) as HTMLDivElement;
     gameCubeFrontend.innerHTML = `${rolledNum}`;
   }
+  async diceAnimation(rolledNum: number): Promise<void> {
+    let number = 0;
+    const helper = () => {
+      const interval = setInterval(() => {
+        number = Math.floor(Math.random() * 6) + 1;
+        this.showGameCubeNum(number);
+      }, 30);
+      setTimeout(() => {
+        clearInterval(interval);
+        this.showGameCubeNum(rolledNum);
+        console.log("after intervall", rolledNum);
+      }, 500);
+    };
+    helper();
+  }
 }
 
 export { GameCubeUi };

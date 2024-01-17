@@ -31,3 +31,5 @@ startButton!.addEventListener("click", () => {
 
 //-----------------------------------------------------------------------
 //TODO:     Figur spawn only on 6
+
+//TODO 
