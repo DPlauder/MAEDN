@@ -7,8 +7,6 @@ const start = new StartScreen();
 const startButton = document.getElementById("startButton");
 
 startButton!.addEventListener("click", () => {
-  console.log("hello start");
-
   const play = new Play(start);
   const myPlayer1 = new Player("red");
   play.addPlayer(myPlayer1);
@@ -32,4 +30,4 @@ startButton!.addEventListener("click", () => {
 //-----------------------------------------------------------------------
 //TODO:     Figur spawn only on 6
 
-//TODO 
+//TODO

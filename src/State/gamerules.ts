@@ -37,16 +37,11 @@ class GameRules {
     return gamecube.checkFor6();
   }
   checkCanMoveOnThrow(gamecube: GameCube, currentPlayer: Player): boolean {
-    console.log("num =", gamecube.getRolledNum());
-
     if (currentPlayer.checkFiguresOnFieled()) {
-      console.log("hello check on field");
       return true;
     } else if (gamecube.checkFor6()) {
-      console.log("hello gamecube check 6");
       return true;
     } else {
-      console.log("hello checkmove false");
       return false;
     }
   }

@@ -40,6 +40,7 @@ class Play {
     const grid = document.getElementById("playField") as HTMLDivElement;
     this.startScreen.changeScreens();
     this.gameBoardUi.updateGameboardPlayerBank(this.players);
+    this.gameBoardUi.highlightPlayerTurn(this.getCurrentPlayer());
     grid.addEventListener("click", (e) => {
       this.checkGamePhase(e.target);
       this.gameBoardUi.updateGameBoardUi(this.gameBoard);
@@ -48,6 +49,7 @@ class Play {
   checkGamePhase(element: EventTarget | null) {
     let idNum: number | null;
     const currentPlayer = this.getCurrentPlayer();
+    this.gameBoardUi.highlightPlayerTurn(currentPlayer);
     console.log("player ", currentPlayer);
     this.gameBoardUi.updateGameBoardUi(this.gameBoard);
     //gamephase 1 | würfeln
@@ -131,6 +133,7 @@ class Play {
       this.currentPlayerIndex =
         (this.currentPlayerIndex + 1) % this.players.length;
     }
+    this.gameBoardUi.highlightPlayerTurn(this.getCurrentPlayer());
   }
 
   rollDice(): void {

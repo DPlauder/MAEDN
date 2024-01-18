@@ -32,7 +32,6 @@ class GameCubeUi {
       setTimeout(() => {
         clearInterval(interval);
         this.showGameCubeNum(rolledNum);
-        console.log("after intervall", rolledNum);
       }, 500);
     };
     helper();

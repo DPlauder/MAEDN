@@ -24,10 +24,10 @@ class GameBoardUi {
 
         const targetCoordinates = [row, column];
         this.playField.addId(newDiv, targetCoordinates);
-
         this.playerZones.setEndzone(newDiv, targetCoordinates);
         this.playerZones.setStartPoints(newDiv, targetCoordinates);
         this.playerZones.setReserveBank(newDiv, targetCoordinates);
+        this.playerZones.setTurnPlaceholder(newDiv, targetCoordinates);
         this.gameCubeUi.createGamecubeUi(newDiv, targetCoordinates);
         parentElement.appendChild(newDiv);
 
@@ -100,6 +100,7 @@ class GameBoardUi {
       `.${currentPlayer.color}Figure`
     );
     figuresToMove.forEach((element) => {
+      console.log(element);
       element.classList.add("playerTurn");
     });
   }
@@ -107,6 +108,18 @@ class GameBoardUi {
     document.querySelectorAll(`.playContainer`).forEach((element) => {
       element.classList.remove("playerTurn");
     });
+  }
+  highlightPlayerTurn(currentPlayer: Player) {
+    console.log(currentPlayer);
+    document.querySelectorAll(".turnField").forEach((element) => {
+      element.classList.remove("turnOn");
+    });
+    const color = currentPlayer.color;
+    const turnHighlight = document.getElementById(
+      `${currentPlayer.color}Turn`
+    ) as HTMLElement;
+    turnHighlight.classList.add("turnOn");
+    console.log(turnHighlight);
   }
 }
 
